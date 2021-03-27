@@ -138,19 +138,19 @@ export default {
 
 @keyframes pulsating {
     from {
-        transform: scale(0.7);
+        transform: scale(1);
     }
     to {
-        transform: scale(1.1);
+        transform: scale(0.7);
     }
 }
 
 @keyframes pulsatingSmall {
     from {
-        transform: scale(0.9);
+        transform: scale(1);
     }
     to {
-        transform: scale(1);
+        transform: scale(0.9);
     }
 }
 
@@ -210,8 +210,8 @@ export default {
             -webkit-text-stroke-color: #fff;
             text-shadow: 0px 0px 30px #000;
             line-height: 9rem;
-            animation: comeIn 0.4s 1 ease-in-out,
-                pulsating 1.5s 0.4s infinite alternate;
+            animation: comeIn 0.5s linear,
+                pulsating 1.5s 0.5s infinite alternate;
             // letter-spacing: 50px;
         }
 
