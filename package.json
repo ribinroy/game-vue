@@ -3,11 +3,12 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "serve": "npm run lint -- --fix && vue-cli-service serve",
+        "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint"
+        "lint": "npm run lint -- --fix && vue-cli-service lint"
     },
     "dependencies": {
+        "@maxflex/v-number": "^1.0.9",
         "core-js": "^3.6.5",
         "vue": "^2.6.11"
     },
