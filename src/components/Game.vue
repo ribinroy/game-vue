@@ -1,7 +1,10 @@
 <template>
     <div class="game">
         <button @click="switchScreen()" class="test_button">TEST</button>
-        <div class="game_screen_items" v-if="currentScreen === 'game'">
+        <div
+            class="game_screen_items"
+            v-if="currentScreen === 'game' || currentScreen === '2 player'"
+        >
             <div class="data_component credits">
                 <span><v-number v-model="credits"></v-number></span>
             </div>
@@ -16,19 +19,17 @@
             <div class="data_component life">
                 <span><v-number v-model="life"></v-number></span>
             </div>
-            <div class="score flex_wrap">
+            <div class="score flex_wrap" v-if="currentScreen === 'game'">
                 <animated-number
                     :value="score"
                     :formatValue="formatToValue"
                     :duration="300"
                 ></animated-number>
             </div>
-        </div>
-        <div
-            class="game_screen_items two_player_wrap"
-            v-if="currentScreen === '2 player'"
-        >
-            <div class="score two_player_score flex_wrap">
+            <div
+                class="score two_player_score flex_wrap"
+                v-if="currentScreen === '2 player'"
+            >
                 <animated-number
                     :value="score"
                     :formatValue="formatToValue"
@@ -89,14 +90,14 @@ export default {
             if (_this.time <= 0) {
                 _this.time = 0;
                 clearInterval(timerInterval);
-            } else _this.time -= 1;
-        }, 1000);
+            } else _this.time -= 10;
+        }, 1);
     },
     data: function () {
         return {
             currentScreen: 'game',
-            credits: 1,
-            time: 30, //in seconds
+            credits: 999,
+            time: 72000, //in milliseconds
             highscore: 51,
             life: 2,
             score: 100,
@@ -107,17 +108,23 @@ export default {
             return `${value.toFixed(0)}`;
         },
         formatToTime(duration) {
-            // Hours, minutes and seconds
-            var hrs = ~~(duration / 3600);
-            var mins = ~~((duration % 3600) / 60);
-            var secs = ~~duration % 60;
+            var milliseconds = parseInt((duration % 1000) / 10),
+                seconds = parseInt((duration / 1000) % 60),
+                minutes = parseInt((duration / (1000 * 60)) % 60),
+                hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
             return (
-                (hrs == 0 ? '00' : hrs) +
+                +minutes +
                 ':' +
-                (mins == 0 ? '00' : mins) +
+                seconds +
                 ':' +
-                (secs == 0 ? '00' : secs)
+                (milliseconds.length == 1 ? '0' + milliseconds : milliseconds)
             );
+            // Hours, minutes and seconds
         },
         switchScreen: function () {
             switch (this.currentScreen) {
@@ -266,8 +273,7 @@ export default {
                 bottom: 46px;
                 width: 50%;
                 text-align: center;
-
-                div {
+                font-variant-numeric: tabular-nums div {
                     padding: 0 15px;
                 }
             }
