@@ -269,11 +269,12 @@ export default {
                 color: #fff;
                 position: absolute;
                 font-size: 50px;
-                right: 20px;
-                bottom: 46px;
+                right: 32px;
+                bottom: 51px;
                 width: 50%;
                 text-align: center;
-                font-variant-numeric: tabular-nums div {
+                font-variant-numeric: tabular-nums;
+                div {
                     padding: 0 15px;
                 }
             }
@@ -284,7 +285,8 @@ export default {
             top: 20px;
 
             span {
-                bottom: 57px;
+                bottom: 63px;
+                right: 15px;
             }
         }
         .life {
@@ -293,13 +295,14 @@ export default {
             bottom: 20px;
 
             span {
-                width: 34%;
+                width: 30%;
             }
         }
         .highscore {
             background-image: url('./../assets/SVG/highscore.svg');
-            left: -10px;
-            bottom: 20px;
+            left: 40px;
+            top: 20px;
+            width: 440px;
 
             &.top_only {
                 bottom: auto !important;
@@ -308,12 +311,12 @@ export default {
         }
         .credits {
             background-image: url('./../assets/SVG/credits.svg');
-            left: -140px;
-            top: 20px;
+            left: -110px;
+            bottom: 20px;
 
             span {
                 width: 30%;
-                bottom: 49px;
+                bottom: 51px;
             }
         }
     }
